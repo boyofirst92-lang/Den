@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-
 :root {
   --maya-green: #00b968;
   --maya-deep: #006f4d;
@@ -74,7 +72,7 @@ button { cursor: pointer; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-width: 172px;
+  min-width: 170px;
   height: 62px;
   padding: 0 22px 0 16px;
   border: 0;
@@ -97,6 +95,24 @@ button { cursor: pointer; }
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1;
+}
+
+.page-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28px 0 0;
+  min-height: 140px;
+}
+
+.maya-logo {
+  margin: 0;
+  font-size: clamp(4.3rem, 11vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+  font-weight: 700;
+  color: var(--maya-green);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .main {
@@ -160,7 +176,6 @@ input[type=range] { width: 100%; margin: 22px 0 5px; accent-color: var(--maya-gr
 .legal { width: min(1080px, calc(100% - 40px)); margin: 0 auto 20px; color: var(--muted); font-size: 11px; text-align: center; }
 .copyright { padding: 18px 0 22px; text-align: center; color: rgba(18, 18, 18, 0.8); font-size: .9rem; font-weight: 600; letter-spacing: .02em; text-transform: lowercase; }
 .login-main { flex: 1; width: min(100%, 520px); margin: 0 auto; padding: 0 22px 12px; display: flex; flex-direction: column; align-items: center; }
-.maya-logo { margin: 28px 0; font-size: clamp(4.7rem, 10vw, 9.6rem); line-height: .9; letter-spacing: -.08em; font-weight: 700; color: var(--maya-green); font-family: 'Space Grotesk', sans-serif; }
 .login-form { width: min(100%, 430px); display: flex; flex-direction: column; gap: 20px; }
 .login-input, .login-password { width: 100%; min-height: 92px; background: rgba(238, 240, 240, .92); border: 1px solid rgba(0, 0, 0, .02); border-radius: 20px; display: flex; align-items: center; }
 .login-input { justify-content: flex-start; gap: 0; }
@@ -178,7 +193,6 @@ input[type=range] { width: 100%; margin: 22px 0 5px; accent-color: var(--maya-gr
 .forgot-link a { color: var(--maya-green); text-decoration: none; font-size: clamp(1.3rem, 2.6vw, 2.1rem); font-weight: 500; letter-spacing: -.05em; }
 .login-button { width: 100%; height: 88px; margin-top: 78px; border: none; border-radius: 24px; background: rgba(161, 230, 179, .9); color: #0a4a32; font-size: clamp(1.6rem, 3vw, 2.5rem); font-weight: 700; }
 
-/* Keep the login screen readable without removing the original color system. */
 h1 { font-size: clamp(30px, 4vw, 48px); }
 h2 { font-size: 24px; }
 .intro { font-size: 15px; }
