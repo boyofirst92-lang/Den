@@ -1,19 +1,41 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your details | Maya</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-:root{--green:#00b968;--deep:#006f4d;--ink:#073b2c;--mint:#e7f8ef;--lime:#c8f169;--line:#dcebe3;--muted:#688077;--white:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#fff;color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer}.page-shell{min-height:100vh;display:flex;flex-direction:column}.topbar{height:335px;min-height:335px;padding:20px 32px 0;display:flex;justify-content:space-between;background:#fff}.back-button{width:50px;height:50px;border:0;background:transparent;position:relative}.back-button:before{content:'←';font-size:40px;color:#111}.help-button{display:inline-flex;align-items:center;gap:9px;min-width:126px;height:64px;padding:0 17px;border:0;border-radius:999px;background:#000;color:#fff;font-weight:700}.help-icon{width:27px;height:27px;display:grid;place-items:center;border:2px solid #fff;border-radius:50%}.main{width:min(1080px,calc(100% - 40px));margin:0 auto;padding:32px 0 72px;flex:1}.auth-wrap{width:min(540px,100%);margin:0 auto}.panel{padding:clamp(25px,6vw,44px);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 20px 60px rgba(0,70,47,.12)}.eyebrow{margin:0 0 12px;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}h2{margin:0;letter-spacing:-1.7px;line-height:1.08;font-family:'Space Grotesk',sans-serif;font-size:24px}.auth-heading{margin-bottom:8px}.auth-copy{margin:0 0 28px;color:var(--muted)}.field{display:block;margin:18px 0;color:var(--ink);font-size:13px;font-weight:700}.field input,.field select{width:100%;margin-top:8px;padding:14px 15px;color:var(--ink);background:#fff;border:1px solid #c8dcd3;border-radius:9px;outline:0}.primary{width:100%;padding:15px 20px;border:0;border-radius:10px;background:var(--lime);color:var(--ink);font-weight:700}.auth-link{display:block;margin-top:18px;color:var(--green);text-align:center;font-size:13px;font-weight:700;text-decoration:none}.legal{display:none}.copyright{padding:18px 0 22px;text-align:center;color:rgba(18,18,18,.8);font-size:.9rem}@media(max-width:720px){.topbar{height:300px;min-height:300px;padding:12px 20px 0}}@media(max-width:420px){.topbar{padding-left:12px;padding-right:12px}.main{width:min(calc(100% - 32px),1080px)}}
-</style>
-</head>
-<body>
-<div class="page-shell">
-<header class="topbar"><button class="back-button" type="button" aria-label="Back" onclick="location.href='application.html'"></button><button class="help-button" type="button" aria-label="Help"><span class="help-icon">?</span><span>Help</span></button></header>
-<main class="main"><div class="auth-wrap"><section class="panel"><p class="eyebrow">Step 2 of 4</p><h2 class="auth-heading">Tell us about yourself</h2><p class="auth-copy">Share a few details so we can tailor your loan application.</p><form id="detailsForm"><label class="field">Full name<input id="fullName" type="text" placeholder="Juan Dela Cruz" autocomplete="name" required></label><label class="field">Mobile number<input id="detailsPhone" type="tel" placeholder="09XX XXX XXXX" autocomplete="tel" inputmode="tel" required></label><label class="field">Monthly income<input id="monthlyIncome" type="number" placeholder="50,000" min="1" step="1" inputmode="decimal" required></label><label class="field">What will you use the loan for?<select id="loanPurpose" required><option value="" disabled selected>Select a purpose</option><option>Home improvement</option><option>Education</option><option>Medical expenses</option><option>Debt consolidation</option><option>Other</option></select></label><button class="primary" type="submit">Continue to login</button></form><a class="auth-link" href="application.html">Back to loan estimate</a></section></div></main><div class="copyright">© 2026 Maya — All rights reserved.</div>
-</div>
-<script>const form=document.querySelector('#detailsForm'),phone=document.querySelector('#detailsPhone');const saved=localStorage.getItem('mayaPhone');if(saved)phone.value=saved;form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;localStorage.setItem('mayaName',document.querySelector('#fullName').value.trim());localStorage.setItem('mayaPhone',phone.value.trim());localStorage.setItem('mayaIncome',document.querySelector('#monthlyIncome').value);localStorage.setItem('mayaLoanPurpose',document.querySelector('#loanPurpose').value);location.href='login.html'});</script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your details | Maya demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <button class="back-button" type="button" aria-label="Back"></button>
+        <button class="help-button" type="button" aria-label="Help">
+          <span class="help-icon">?</span>
+          <span>Help</span>
+        </button>
+      </header>
+
+      <main class="main">
+        <div class="auth-wrap details-wrap">
+          <section class="panel">
+            <p class="eyebrow">Step 2 of 4</p>
+            <h2 class="auth-heading">Tell us about yourself</h2>
+            <p class="auth-copy">Share a few details so we can tailor your loan application.</p>
+            <form id="detailsForm">
+              <label class="field">Full name<input id="fullName" type="text" placeholder="Juan Dela Cruz" autocomplete="name" required></label>
+              <label class="field">Mobile number<input id="detailsPhone" type="tel" placeholder="09XX XXX XXXX" autocomplete="tel" inputmode="tel" required></label>
+              <label class="field">Monthly income<input id="monthlyIncome" type="number" placeholder="50,000" min="1" step="1" inputmode="decimal" required></label>
+              <label class="field">What will you use the loan for?<select id="loanPurpose" required><option value="" disabled selected>Select a purpose</option><option>Home improvement</option><option>Medical expenses</option><option>Education</option><option>Travel</option><option>Business</option><option>Emergency</option></select></label>
+              <button class="primary" type="submit">Continue to login</button>
+            </form>
+            <a class="auth-link" href="application.html">Back to loan estimate</a>
+          </section>
+        </div>
+      </main>
+      <p class="legal">Demo experience only. No application, credit check, or payment is submitted.</p>
+      <div class="copyright">maya © 2026</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
