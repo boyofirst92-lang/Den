@@ -73,6 +73,7 @@ function initLogin() {
   phone.value = localStorage.getItem('mayaPhone') || '';
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    if (!form.reportValidity()) return;
     localStorage.setItem('mayaPhone', phone.value.trim());
     window.location.href = 'otp.html';
   });
@@ -81,13 +82,42 @@ function initLogin() {
 function initOtp() {
   const form = document.querySelector('#otpForm');
   if (!form) return;
-  const fields = [...document.querySelectorAll('.otp-boxes input')];
-  fields.forEach((field, index) => field.addEventListener('input', () => {
-    if (field.value && fields[index + 1]) fields[index + 1].focus();
-  }));
+  const fields = [...form.querySelectorAll('.otp-boxes input')];
+  const error = document.querySelector('#otpError');
+
+  fields.forEach((field, index) => {
+    field.addEventListener('input', () => {
+      field.value = field.value.replace(/\D/g, '').slice(-1);
+      error.hidden = true;
+      if (field.value && fields[index + 1]) fields[index + 1].focus();
+    });
+    field.addEventListener('keydown', (event) => {
+      if (event.key === 'Backspace' && !field.value && fields[index - 1]) fields[index - 1].focus();
+    });
+    field.addEventListener('paste', (event) => {
+      const code = (event.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, fields.length);
+      if (!code) return;
+      event.preventDefault();
+      code.split('').forEach((digit, digitIndex) => { fields[digitIndex].value = digit; });
+      fields[Math.min(code.length, fields.length) - 1].focus();
+    });
+  });
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
+    const code = fields.map((field) => field.value).join('');
+    if (code.length !== fields.length) {
+      error.hidden = false;
+      fields.find((field) => !field.value)?.focus();
+      return;
+    }
     window.location.href = 'success.html';
+  });
+
+  document.querySelector('#resendOtp')?.addEventListener('click', () => {
+    fields.forEach((field) => { field.value = ''; });
+    error.hidden = true;
+    fields[0].focus();
   });
 }
 
