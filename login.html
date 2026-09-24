@@ -1,1 +1,46 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login | Maya</title><style>body{margin:0;font:16px Arial;color:#073b2c;background:#fff}.page{max-width:430px;margin:120px auto;padding:30px}.field{display:block;margin:18px 0;font-weight:700}.field input{display:block;width:100%;box-sizing:border-box;margin-top:8px;padding:15px;border:1px solid #c8dcd3;border-radius:9px}.button{width:100%;padding:15px;border:0;border-radius:10px;background:#c8f169;color:#073b2c;font-weight:700}.back{display:block;margin-bottom:30px;color:#006f4d}</style></head><body><main class="page"><a class="back" href="details.html">← Back</a><h1>Log in to Maya</h1><form id="loginForm"><label class="field">Phone number<input id="loginPhone" type="tel" autocomplete="tel" required></label><label class="field">Password<input type="password" required></label><button class="button" type="submit">Log in</button></form></main><script>const f=document.querySelector('#loginForm'),p=document.querySelector('#loginPhone');p.value=localStorage.getItem('mayaPhone')||'';f.onsubmit=e=>{e.preventDefault();if(!f.reportValidity())return;localStorage.setItem('mayaPhone',p.value.trim());location.href='otp.html'}</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | Maya</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <button class="back-button" type="button" aria-label="Back"></button>
+        <button class="help-button" type="button" aria-label="Help">
+          <span class="help-icon">?</span>
+          <span>Help</span>
+        </button>
+      </header>
+
+      <main class="login-main">
+        <div class="maya-logo">maya</div>
+
+        <form id="loginForm" class="login-form" action="#" method="post">
+          <div class="login-input" aria-label="Phone number field">
+            <div class="login-phone-prefix">+63</div>
+            <input id="loginPhone" type="tel" placeholder="Phone number" aria-label="Phone number" autocomplete="tel" inputmode="tel" required />
+          </div>
+
+          <div class="login-password" aria-label="Password field">
+            <div class="field-label">Password</div>
+            <input type="password" placeholder="Enter password" aria-label="Password" required />
+            <span class="eye-icon" aria-hidden="true"></span>
+          </div>
+
+          <div class="forgot-link">
+            <a href="#">Forgot your password?</a>
+          </div>
+
+          <button class="login-button" type="submit">Log in</button>
+        </form>
+      </main>
+
+      <div class="copyright">maya © 2026</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
