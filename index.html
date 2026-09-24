@@ -5,7 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="refresh" content="0; url=application.html">
     <title>Maya loan demo</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+      :root {
+        --maya-green: #00b968;
+        --maya-deep: #006f4d;
+        --maya-ink: #073b2c;
+        --maya-mint: #e7f8ef;
+        --maya-lime: #c8f169;
+        --paper: #f7fbf8;
+        --line: #dcebe3;
+        --muted: #688077;
+        --white: #ffffff;
+        --shadow: 0 20px 60px rgba(0, 70, 47, .12);
+        --dark: #000000;
+        --soft-bg: #ffffff;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #ffffff; color: var(--maya-ink); font-family: 'DM Sans', sans-serif; line-height: 1.5; }
+      body { min-height: 100vh; }
+      button, input, select { font: inherit; }
+      button { cursor: pointer; }
+      .main { width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 72px; flex: 1; }
+      p { margin: 0; }
+      a { color: var(--maya-green); }
+      html, body, button, input, select { font-family: 'DM Sans', sans-serif; }
+      h1, h2, .amount strong, .monthly, .maya-logo { font-family: 'DM Sans', sans-serif; }
+    </style>
   </head>
   <body>
     <main class="main">

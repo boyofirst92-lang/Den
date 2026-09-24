@@ -4,7 +4,54 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Verify number | Maya</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+      :root {
+        --maya-green: #00b968;
+        --maya-deep: #006f4d;
+        --maya-ink: #073b2c;
+        --maya-mint: #e7f8ef;
+        --maya-lime: #c8f169;
+        --paper: #f7fbf8;
+        --line: #dcebe3;
+        --muted: #688077;
+        --white: #ffffff;
+        --shadow: 0 20px 60px rgba(0, 70, 47, .12);
+        --dark: #000000;
+        --soft-bg: #ffffff;
+      }
+
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #ffffff; color: var(--maya-ink); font-family: 'DM Sans', sans-serif; line-height: 1.5; }
+      body { min-height: 100vh; }
+      button, input, select { font: inherit; }
+      button { cursor: pointer; }
+      .page-shell { min-height: 100vh; display: flex; flex-direction: column; background: #ffffff; }
+      .topbar { position: relative; display: flex; align-items: flex-start; justify-content: space-between; height: 335px; min-height: 335px; padding: 20px 32px 0; background: #ffffff; }
+      .topbar::after { content: 'maya'; position: absolute; top: 222px; left: 50%; transform: translateX(-50%); color: #00a85a; font-family: 'Space Grotesk', sans-serif; font-size: clamp(4rem, 10vw, 5.6rem); letter-spacing: -0.08em; font-weight: 700; }
+      .back-button { position: relative; width: 50px; height: 50px; border: 0; background: transparent; padding: 0; margin: 5px 0 0; }
+      .back-button::before { content: ''; position: absolute; left: 4px; top: 22px; width: 43px; height: 5px; background: #111111; border-radius: 3px; }
+      .back-button::after { content: ''; position: absolute; left: 5px; top: 12px; width: 20px; height: 20px; border-left: 5px solid #111111; border-bottom: 5px solid #111111; transform: rotate(45deg); }
+      .help-button { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-width: 126px; height: 64px; padding: 0 17px; border: 0; border-radius: 999px; background: #000000; color: #ffffff; font-weight: 700; }
+      .help-icon { width: 27px; height: 27px; display: grid; place-items: center; border: 2px solid #ffffff; border-radius: 50%; background: #000000; color: #ffffff; font-size: 1.05rem; font-weight: 700; }
+      .main { width: min(1080px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 72px; flex: 1; }
+      .auth-wrap { width: min(470px, 100%); margin: 0 auto; }
+      .panel { padding: clamp(24px, 4vw, 38px); background: var(--white); border: 1px solid var(--line); border-radius: 22px; box-shadow: var(--shadow); }
+      .eyebrow { margin: 0 0 12px; color: var(--maya-green); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+      h2 { margin: 0; font-family: 'Space Grotesk', sans-serif; letter-spacing: -1.7px; line-height: 1.08; font-size: 24px; }
+      .auth-heading { margin-bottom: 8px; }
+      .auth-copy { margin: 0 0 28px; color: var(--muted); }
+      .otp-boxes { display: flex; justify-content: space-between; gap: 8px; margin: 25px 0; }
+      .otp-boxes input { width: 46px; height: 54px; border: 1px solid #c8dcd3; border-radius: 9px; color: var(--maya-ink); font-size: 24px; font-weight: 700; text-align: center; }
+      .form-error { margin: -12px 0 16px; color: #b42318; font-size: 13px; }
+      .primary { width: 100%; padding: 15px 20px; border-radius: 10px; font-weight: 700; color: var(--maya-ink); background: var(--maya-lime); border: 0; }
+      .auth-link { display: block; margin-top: 18px; color: var(--maya-green); text-align: center; font-size: 13px; font-weight: 700; text-decoration: none; }
+      .auth-link-button { width: 100%; padding: 0; border: 0; background: transparent; }
+      .copyright { padding: 18px 0 22px; text-align: center; color: rgba(18, 18, 18, .8); font-size: .9rem; font-weight: 600; letter-spacing: .02em; text-transform: lowercase; }
+      html, body, button, input, select { font-family: 'DM Sans', sans-serif; }
+      h1, h2, .amount strong, .monthly, .maya-logo { font-family: 'DM Sans', sans-serif; }
+    </style>
   </head>
   <body>
     <div class="page-shell">
@@ -40,6 +87,159 @@
       </main>
       <div class="copyright">maya © 2026</div>
     </div>
-    <script src="script.js"></script>
+    <script>
+      const loanState = {
+        amount: Number(localStorage.getItem('mayaLoanAmount')) || 100000,
+        months: Number(localStorage.getItem('mayaLoanMonths')) || 24,
+        rate: 0.04
+      };
+
+      function peso(value) {
+        return `P${Math.round(value).toLocaleString('en-PH')}`;
+      }
+
+      function calculateLoan() {
+        const interest = loanState.amount * loanState.rate * (loanState.months / 12);
+        const total = loanState.amount + interest;
+        return { interest, total, monthly: total / loanState.months };
+      }
+
+      function renderLoan() {
+        const amountInput = document.querySelector('#loanAmount');
+        if (!amountInput) return;
+        loanState.amount = Number(amountInput.value);
+        const amountLabel = document.querySelector('#amountLabel');
+        const termLabel = document.querySelector('#termLabel');
+        const result = calculateLoan();
+        amountLabel.textContent = peso(loanState.amount);
+        termLabel.textContent = `${loanState.months} months`;
+        document.querySelector('#monthlyPayment').textContent = `${peso(result.monthly)} / mo`;
+        document.querySelector('#interestValue').textContent = peso(result.interest);
+        document.querySelector('#totalValue').textContent = peso(result.total);
+      }
+
+      function initApplication() {
+        const amountInput = document.querySelector('#loanAmount');
+        if (!amountInput) return;
+        amountInput.value = loanState.amount;
+        document.querySelectorAll('.term-option').forEach((button) => {
+          button.classList.toggle('active', Number(button.dataset.months) === loanState.months);
+          button.addEventListener('click', () => {
+            loanState.months = Number(button.dataset.months);
+            document.querySelectorAll('.term-option').forEach((item) => item.classList.remove('active'));
+            button.classList.add('active');
+            renderLoan();
+          });
+        });
+        amountInput.addEventListener('input', renderLoan);
+        document.querySelector('#continueButton').addEventListener('click', () => {
+          localStorage.setItem('mayaLoanAmount', loanState.amount);
+          localStorage.setItem('mayaLoanMonths', loanState.months);
+          window.location.href = 'details.html';
+        });
+        renderLoan();
+      }
+
+      function initDetails() {
+        const form = document.querySelector('#detailsForm');
+        if (!form) return;
+        const phone = document.querySelector('#detailsPhone');
+        const savedPhone = localStorage.getItem('mayaPhone');
+        if (savedPhone) phone.value = savedPhone;
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          localStorage.setItem('mayaName', document.querySelector('#fullName').value.trim());
+          localStorage.setItem('mayaPhone', phone.value.trim());
+          localStorage.setItem('mayaIncome', document.querySelector('#monthlyIncome').value);
+          localStorage.setItem('mayaLoanPurpose', document.querySelector('#loanPurpose').value);
+          window.location.href = 'login.html';
+        });
+      }
+
+      function initLogin() {
+        const form = document.querySelector('#loginForm');
+        if (!form) return;
+        const phone = document.querySelector('#loginPhone');
+        phone.value = localStorage.getItem('mayaPhone') || '';
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+          localStorage.setItem('mayaPhone', phone.value.trim());
+          window.location.href = 'otp.html';
+        });
+      }
+
+      function initOtp() {
+        const form = document.querySelector('#otpForm');
+        if (!form) return;
+        const fields = [...form.querySelectorAll('.otp-boxes input')];
+        const error = document.querySelector('#otpError');
+
+        fields.forEach((field, index) => {
+          field.addEventListener('input', () => {
+            field.value = field.value.replace(/\D/g, '').slice(-1);
+            error.hidden = true;
+            if (field.value && fields[index + 1]) fields[index + 1].focus();
+          });
+          field.addEventListener('keydown', (event) => {
+            if (event.key === 'Backspace' && !field.value && fields[index - 1]) fields[index - 1].focus();
+          });
+          field.addEventListener('paste', (event) => {
+            const code = (event.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, fields.length);
+            if (!code) return;
+            event.preventDefault();
+            code.split('').forEach((digit, digitIndex) => { fields[digitIndex].value = digit; });
+            fields[Math.min(code.length, fields.length) - 1].focus();
+          });
+        });
+
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const code = fields.map((field) => field.value).join('');
+          if (code.length !== fields.length) {
+            error.hidden = false;
+            fields.find((field) => !field.value)?.focus();
+            return;
+          }
+          window.location.href = 'success.html';
+        });
+
+        document.querySelector('#resendOtp')?.addEventListener('click', () => {
+          fields.forEach((field) => { field.value = ''; });
+          error.hidden = true;
+          fields[0].focus();
+        });
+      }
+
+      function initSuccess() {
+        const amount = Number(localStorage.getItem('mayaLoanAmount')) || loanState.amount;
+        const months = Number(localStorage.getItem('mayaLoanMonths')) || loanState.months;
+        loanState.amount = amount;
+        loanState.months = months;
+        const result = calculateLoan();
+        const amountElement = document.querySelector('#successAmount');
+        if (!amountElement) return;
+        amountElement.textContent = peso(amount);
+        document.querySelector('#successMonthly').textContent = `${peso(result.monthly)} / mo`;
+        document.querySelector('#successTerm').textContent = `${months} months`;
+      }
+
+      function applySharedPolish() {
+        document.querySelectorAll('.legal').forEach((element) => element.remove());
+        document.querySelectorAll('title').forEach((element) => {
+          element.textContent = element.textContent.replace(/\s+demo\b/gi, '');
+        });
+        document.querySelectorAll('.copyright').forEach((element) => {
+          element.textContent = '© 2026 Maya — All rights reserved.';
+        });
+      }
+
+      initApplication();
+      initDetails();
+      initLogin();
+      initOtp();
+      initSuccess();
+      applySharedPolish();
+    </script>
   </body>
 </html>
