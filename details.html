@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your details | Maya demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar"><a class="brand" href="application.html"><span class="brand-mark">M</span>Maya</a><span class="demo-pill">INTERACTIVE DEMO</span></header>
+    <main class="main">
+      <div class="auth-wrap details-wrap">
+        <section class="panel">
+          <p class="eyebrow">Step 2 of 4</p>
+          <h2 class="auth-heading">Tell us about yourself</h2>
+          <p class="auth-copy">Share a few details so we can tailor your loan application.</p>
+          <form id="detailsForm">
+            <label class="field">Full name<input id="fullName" type="text" placeholder="Juan Dela Cruz" autocomplete="name" required></label>
+            <label class="field">Mobile number<input id="detailsPhone" type="tel" placeholder="09XX XXX XXXX" autocomplete="tel" inputmode="tel" required></label>
+            <label class="field">Monthly income<input id="monthlyIncome" type="number" placeholder="50,000" min="1" step="1" inputmode="decimal" required></label>
+            <label class="field">What will you use the loan for?<select id="loanPurpose" required><option value="" disabled selected>Select a purpose</option><option>Home improvement</option><option>Education</option><option>Medical expenses</option><option>Business</option><option>Travel</option><option>Other personal needs</option></select></label>
+            <button class="primary" type="submit">Continue to login</button>
+          </form>
+          <a class="auth-link" href="application.html">Back to loan estimate</a>
+        </section>
+      </div>
+    </main>
+    <p class="legal">Demo experience only. No application, credit check, or payment is submitted.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

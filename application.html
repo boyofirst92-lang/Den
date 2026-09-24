@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loan application | Maya demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar"><a class="brand" href="application.html"><span class="brand-mark">M</span>Maya</a><span class="demo-pill">INTERACTIVE DEMO</span></header>
+    <main class="main">
+      <p class="eyebrow">Personal loan</p>
+      <h1>Make room for what matters.</h1>
+      <p class="intro">Choose an amount and repayment plan that fits your next move. Get an instant estimate before you continue.</p>
+      <div class="grid">
+        <section class="panel">
+          <h2>Build your loan</h2>
+          <div class="amount"><span>Loan amount</span><strong id="amountLabel">P100,000</strong></div>
+          <input id="loanAmount" type="range" min="5000" max="500000" step="5000" value="100000" aria-label="Loan amount">
+          <div class="range-labels"><span>P5,000</span><span>P500,000</span></div>
+          <div class="term-title"><span>Repayment term</span><span id="termLabel">24 months</span></div>
+          <div class="term-options" aria-label="Repayment term options">
+            <button class="term-option" type="button" data-months="6">6 mo</button>
+            <button class="term-option" type="button" data-months="12">12 mo</button>
+            <button class="term-option" type="button" data-months="24">24 mo</button>
+            <button class="term-option" type="button" data-months="36">36 mo</button>
+            <button class="term-option" type="button" data-months="60">60 mo</button>
+          </div>
+        </section>
+        <aside class="panel estimate">
+          <h2>Your estimate</h2><p class="estimate-label">Estimated monthly payment</p>
+          <div class="monthly" id="monthlyPayment">P4,333 / mo</div>
+          <div class="breakdown"><div class="row"><span>Interest rate</span><strong>4% per year</strong></div><div class="row"><span>Estimated interest</span><strong id="interestValue">P8,000</strong></div><div class="row"><span>Total repayment</span><strong id="totalValue">P108,000</strong></div></div>
+          <button class="primary" id="continueButton" type="button">Continue application</button>
+        </aside>
+      </div>
+    </main>
+    <p class="legal">Demo experience only. No application, credit check, or payment is submitted.</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
