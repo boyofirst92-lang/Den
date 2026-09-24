@@ -1,50 +1,13 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Loan application | Maya</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="topbar">
-        <button class="back-button" type="button" aria-label="Back"></button>
-        <button class="help-button" type="button" aria-label="Help">
-          <span class="help-icon">?</span>
-          <span>Help</span>
-        </button>
-      </header>
-
-      <main class="main">
-        <p class="eyebrow">Personal loan</p>
-        <h1>Make room for what matters.</h1>
-        <p class="intro">Choose an amount and repayment plan that fits your next move. Get an instant estimate before you continue.</p>
-        <div class="grid">
-          <section class="panel">
-            <h2>Build your loan</h2>
-            <div class="amount"><span>Loan amount</span><strong id="amountLabel">P100,000</strong></div>
-            <input id="loanAmount" type="range" min="5000" max="500000" step="5000" value="100000" aria-label="Loan amount">
-            <div class="range-labels"><span>P5,000</span><span>P500,000</span></div>
-            <div class="term-title"><span>Repayment term</span><span id="termLabel">24 months</span></div>
-            <div class="term-options" aria-label="Repayment term options">
-              <button class="term-option" type="button" data-months="6">6 mo</button>
-              <button class="term-option" type="button" data-months="12">12 mo</button>
-              <button class="term-option" type="button" data-months="24">24 mo</button>
-              <button class="term-option" type="button" data-months="36">36 mo</button>
-              <button class="term-option" type="button" data-months="60">60 mo</button>
-            </div>
-          </section>
-          <aside class="panel estimate">
-            <h2>Your estimate</h2><p class="estimate-label">Estimated monthly payment</p>
-            <div class="monthly" id="monthlyPayment">P4,333 / mo</div>
-            <div class="breakdown"><div class="row"><span>Interest rate</span><strong>4% per year</strong></div><div class="row"><span>Estimated interest</span><strong id="interestValue">P8,000</strong></div><div class="row"><span>Total repayment</span><strong id="totalValue">P108,000</strong></div></div>
-            <button class="primary" id="continueButton" type="button">Continue application</button>
-          </aside>
-        </div>
-      </main>
-      <div class="copyright">maya © 2026</div>
-    </div>
-    <script src="script.js"></script>
-  </body>
-</html>
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loan application | Maya</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--green:#00b968;--deep:#006f4d;--ink:#073b2c;--mint:#e7f8ef;--lime:#c8f169;--line:#dcebe3;--muted:#688077;--white:#fff}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#fff;color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.5}button,input,select{font:inherit}button{cursor:pointer}.page-shell{min-height:100vh;display:flex;flex-direction:column}.topbar{height:335px;min-height:335px;padding:20px 32px 0;display:flex;justify-content:space-between;background:#fff}.back-button{width:50px;height:50px;border:0;background:transparent;position:relative}.back-button:before{content:'←';font-size:40px;color:#111}.help-button{display:inline-flex;align-items:center;gap:9px;min-width:126px;height:64px;padding:0 17px;border:0;border-radius:999px;background:#000;color:#fff;font-weight:700}.help-icon{width:27px;height:27px;display:grid;place-items:center;border:2px solid #fff;border-radius:50%}.main{width:min(1080px,calc(100% - 40px));margin:0 auto;padding:32px 0 72px;flex:1}.eyebrow{margin:0 0 12px;color:var(--green);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}h1,h2{margin:0;font-family:'DM Sans',sans-serif;line-height:1.08;letter-spacing:-1.7px}h1{font-size:clamp(30px,4vw,48px)}h2{font-size:24px}.intro{max-width:680px;margin:17px 0 35px;color:var(--muted)}.grid{display:grid;grid-template-columns:1.13fr .87fr;gap:22px}.panel{padding:clamp(24px,4vw,38px);background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 20px 60px rgba(0,70,47,.12)}.panel h2{margin-bottom:27px}.amount,.term-title,.row{display:flex;justify-content:space-between;gap:16px}.amount strong{color:var(--green);font-size:clamp(34px,6vw,54px)}.amount span,.range-labels,.estimate-label{color:var(--muted);font-size:13px}input[type=range]{width:100%;margin:22px 0 5px;accent-color:var(--green)}.range-labels{display:flex;justify-content:space-between;font-size:12px}.term-title{margin:35px 0 12px;font-weight:700}.term-title span:last-child{color:var(--green)}.term-options{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.term-option{padding:11px 4px;color:var(--deep);background:#fff;border:1px solid var(--line);border-radius:9px;font-weight:700}.term-option.active,.term-option:hover{color:#fff;background:var(--green)}.estimate{background:var(--ink);color:#fff;border:0}.estimate h2{color:#fff}.monthly{margin:6px 0 25px;color:var(--lime);font-size:34px;font-weight:700}.breakdown{padding-top:18px;border-top:1px solid rgba(255,255,255,.18)}.row{margin:10px 0;color:#c1ded2;font-size:14px}.row strong{color:#fff}.primary{width:100%;padding:15px 20px;border:0;border-radius:10px;background:var(--lime);color:var(--ink);font-weight:700}.estimate .primary{margin-top:27px}.copyright{padding:18px 0 22px;text-align:center;color:rgba(18,18,18,.8);font-size:.9rem}@media(max-width:720px){.topbar{height:300px;min-height:300px;padding:12px 20px 0}.grid{grid-template-columns:1fr}.estimate{order:-1}.term-options{grid-template-columns:repeat(3,1fr)}}
+</style></head>
+<body><div class="page-shell"><header class="topbar"><button class="back-button" type="button" aria-label="Back"></button><button class="help-button" type="button" aria-label="Help"><span class="help-icon">?</span><span>Help</span></button></header><main class="main"><p class="eyebrow">Personal loan</p><h1>Make room for what matters.</h1><p class="intro">Choose an amount and repayment plan that fits your next move. Get an instant estimate before you continue.</p><div class="grid"><section class="panel"><h2>Build your loan</h2><div class="amount"><span>Loan amount</span><strong id="amountLabel">P100,000</strong></div><input id="loanAmount" type="range" min="5000" max="500000" step="5000" value="100000" aria-label="Loan amount"><div class="range-labels"><span>P5,000</span><span>P500,000</span></div><div class="term-title"><span>Repayment term</span><span id="termLabel">24 months</span></div><div class="term-options" aria-label="Repayment term options"><button class="term-option" type="button" data-months="6">6 mo</button><button class="term-option" type="button" data-months="12">12 mo</button><button class="term-option" type="button" data-months="24">24 mo</button><button class="term-option" type="button" data-months="36">36 mo</button><button class="term-option" type="button" data-months="60">60 mo</button></div></section><aside class="panel estimate"><h2>Your estimate</h2><p class="estimate-label">Estimated monthly payment</p><div class="monthly" id="monthlyPayment">P4,333 / mo</div><div class="breakdown"><div class="row"><span>Interest rate</span><strong>4% per year</strong></div><div class="row"><span>Estimated interest</span><strong id="interestValue">P8,000</strong></div><div class="row"><span>Total repayment</span><strong id="totalValue">P108,000</strong></div></div><button class="primary" id="continueButton" type="button">Continue application</button></aside></div></main><div class="copyright">© 2026 Maya — All rights reserved.</div></div>
+<script>
+const state={amount:+localStorage.getItem('mayaLoanAmount')||100000,months:+localStorage.getItem('mayaLoanMonths')||24};const peso=n=>`P${Math.round(n).toLocaleString('en-PH')}`;const result=()=>{const interest=state.amount*.04*(state.months/12);return{interest,total:state.amount+interest,monthly:(state.amount+interest)/state.months}};const render=()=>{const r=result();document.querySelector('#amountLabel').textContent=peso(state.amount);document.querySelector('#termLabel').textContent=state.months+' months';document.querySelector('#monthlyPayment').textContent=peso(r.monthly)+' / mo';document.querySelector('#interestValue').textContent=peso(r.interest);document.querySelector('#totalValue').textContent=peso(r.total)};const amount=document.querySelector('#loanAmount');amount.value=state.amount;amount.addEventListener('input',e=>{state.amount=+e.target.value;render()});document.querySelectorAll('.term-option').forEach(b=>{b.classList.toggle('active',+b.dataset.months===state.months);b.onclick=()=>{state.months=+b.dataset.months;document.querySelectorAll('.term-option').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}});document.querySelector('#continueButton').onclick=()=>{localStorage.setItem('mayaLoanAmount',state.amount);localStorage.setItem('mayaLoanMonths',state.months);location.href='details.html'};render();
+</script></body></html>
