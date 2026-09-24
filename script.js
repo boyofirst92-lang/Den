@@ -134,8 +134,20 @@ function initSuccess() {
   document.querySelector('#successTerm').textContent = `${months} months`;
 }
 
+function applySharedPolish() {
+  // Keep the page focused on the product experience rather than sample/demo copy.
+  document.querySelectorAll('.legal').forEach((element) => element.remove());
+  document.querySelectorAll('title').forEach((element) => {
+    element.textContent = element.textContent.replace(/\s+demo\b/gi, '');
+  });
+  document.querySelectorAll('.copyright').forEach((element) => {
+    element.textContent = '© 2026 Maya — All rights reserved.';
+  });
+}
+
 initApplication();
 initDetails();
 initLogin();
 initOtp();
 initSuccess();
+applySharedPolish();

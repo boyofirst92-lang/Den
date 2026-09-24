@@ -1,0 +1,16 @@
+/* Shared visual refinements: use one type family without changing the existing colour system. */
+html,
+body,
+button,
+input,
+select {
+  font-family: 'DM Sans', sans-serif;
+}
+
+h1,
+h2,
+.amount strong,
+.monthly,
+.maya-logo {
+  font-family: 'DM Sans', sans-serif;
+}
